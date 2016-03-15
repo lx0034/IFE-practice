@@ -3,28 +3,23 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
-	<!-- 样式表用link引入不进来，不知道怎么回事.. -->
- 	<style>
-		body{
-			font:bold 15px "microsoft yahei";
-		}
-		img{
-			width:300px;
-			height:242px;
-		}
-	</style>
+	<link rel="stylesheet" type="text/css" href="lx_style.css">
 	<!-- HTML5新标签兼容IE -->
 	<script src="js/html5shiv.js"></script>
 </head>
 <body>
-	<h1>网站一级标题</h1>
-	<ul>
-		<li><a href="#">导航链接一</a></li>
-		<li><a href="#">导航链接二</a></li>
-		<li><a href="#">导航链接三</a></li>
-		<li><a href="#">导航链接四</a></li>
-	</ul>
-	<article>
+
+	<header>
+		<h1></h1>
+		<ul>
+			<li><a href="#">导航链接一</a></li>
+			<li><a href="#">导航链接二</a></li>
+			<li><a href="#">导航链接三</a></li>
+			<li><a href="#">导航链接四</a></li>
+		</ul>
+	</header>
+
+	<article id="art1">
 		<hgroup>
 			<h1>文章一级标题</h1>
 			<h2>文章二级标题</h2>
@@ -37,7 +32,8 @@
 		<img src="imgs/1.png" alt="好看的图片" title="好看的图片" />
 		<p>这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，换行了<br />这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，<a href="http://ife.baidu.com">这里有一个链接链接到http://ife.baidu.com</a>这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落。</p>
 	</article>
-	<article>
+
+	<article id="art2">
 		<hgroup>
 			<h1>另一篇文章一级标题</h1>
 			<h2>文章二级标题</h2>
@@ -54,8 +50,9 @@
 			<li>列表项目三</li>
 		</ul>
 	</article>
-	<section>
-		<h2>图片</h2>
+
+	<article id="art3">
+		<h1>图片</h1>
 		<figure>
 			<figcaption>好看的图片</figcaption>
 			<img src="imgs/1.png" alt="好看的图片" title="好看的图片" />
@@ -96,8 +93,9 @@
 			<figcaption>好看的图片</figcaption>
 			<img src="imgs/1.png" alt="好看的图片" title="好看的图片" />
 		</figure>
-	</section>
-	<article>
+	</article>
+
+	<article id="art4">
 		<hgroup>
 			<h1>最后一篇文章一级标题</h1>
 			<h2>文章二级标题</h2>
@@ -112,7 +110,7 @@
 			<li>排名3</li>
 		</ol>
 		<p>下面是一个表格，给表格添加了一个border=“1”好让你看出是一个表格</p>
-		<table border="1px">
+		<table>
 			<tr>
 				<td>表头</td>
 				<td>表头</td>
@@ -138,37 +136,53 @@
 				<td colspan="2">1000</td>
 			</tr>
 		</table>
+	</article>
+
+	<article id="art5">
 		<aside>
 			<h2>这里以后是一个侧栏，这是侧栏的标题</h2>
-			<h3>侧栏注册窗口标题</h3>
 		</aside>
 		<form action="#">
-			<label for="">请输入邮箱地址：</label>
-			<input type="email" placeholder="这是一个文本输入框" />
-			<p>邮箱地址请按要求格式输入</p>
-			<label for="">请输入密码：</label>
-			<input type="password" placeholder="这是一个文本输入框" pattern="\w{6,16}" />
-			<label for="">请重复输入密码：</label>
-			<input type="password" placeholder="这是一个文本输入框" pattern="\w{6,16}" />
-			<p>密码请为6-16位英文数字</p>
-			<label for="">性别：</label>
-			<input type="radio" name="sex" checked="checked"/><label for="">男</label>
-			<input type="radio" name="sex" /><label for="">女</label>
+			<div>
+				<label for="">请输入邮箱地址：</label>
+				<input type="email" placeholder="这是一个文本输入框" />
+				<p>邮箱地址请按要求格式输入</p>
+			</div>
+				
+			<div>
+				<label for="">请输入密码：</label>
+				<input type="password" placeholder="这是一个文本输入框" pattern="\w{6,16}" /><br />	
+				<label for="">请重复输入密码：</label>
+				<input type="password" placeholder="这是一个文本输入框" pattern="\w{6,16}" />
+				<p>密码请为6-16位英文数字</p>				
+			</div>
+
+			<div>
+				<label for="">性别：</label>
+				<input type="radio" name="sex" /><label for="">男</label>
+				<input type="radio" name="sex" /><label for="">女</label>
+			<br />
 			<label for="">城市：</label>
-			<select value="北京" id="city">
-				<option value="北京">北京</option>
-				<option value="上海">上海</option>
-				<option value="广州">广州</option>	
-			</select>
-			<label for="hobby">爱好：</label>
-			<input type="checkbox" name="hobby" /><label for="">运动</label>
-			<input type="checkbox" name="hobby" /><label for="">艺术</label>
-			<input type="checkbox" name="hobby" /><label for="">科学</label>
-			<label for="discription">个人描述：</label>
-			<textarea name="discription" id="discription" cols="22" rows="2" placeholder="这是一个多行输入框，输入您的个人描述"></textarea>
+				<select value="北京" id="city">
+					<option value="北京">北京</option>
+					<option value="上海">上海</option>
+					<option value="广州">广州</option>	
+				</select>
+				<br />
+				<label for="hobby">爱好：</label>
+				<input type="checkbox" name="hobby" /><label for="">运动</label>
+				<input type="checkbox" name="hobby" /><label for="">艺术</label>
+				<input type="checkbox" name="hobby" /><label for="">科学</label>
+				<br />
+				<label for="discription">个人描述：</label>
+				<textarea name="discription" id="discription" cols="100" rows="5" placeholder="这是一个多行输入框，输入您的个人描述"></textarea>
+			</div>
+		
 			<input type="submit" value="确认提交" />
 		</form>
-		<p>版权所有©</p>
 	</article>
+
+	<footer>版权所有</footer>
+	
 </body>
 </html>
