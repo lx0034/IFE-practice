@@ -1,0 +1,193 @@
+*{ 	margin:0;
+	padding:0;
+}
+
+footer{
+	background-color: #000000;
+	text-align: center;
+	height: 70px;
+	color: #FFFFFF;
+	padding-top: 20px;
+}
+
+body{
+	font-family: "Microsoft YaHei";
+	background-color:#D3D3D3;
+}
+header>h1{
+	background-image: url("img/baidu.png");
+	width: 117px;
+	height: 38px;
+	position: absolute;
+	left:40px;
+	top:10px;
+
+}
+
+img{
+	display: block;
+	margin:20px 0;
+}
+
+header{
+	background-color: #000000;
+	height: 60px;
+	position: relative;
+}
+
+
+header>ul>li{
+	
+	float:left;
+	margin-left: 20px;
+}
+
+header>ul{
+	width: 27.2%;
+	height: 25px;
+	float:right;
+	margin:20px 0 0 0;
+}
+
+header>ul>li>a{
+	color:#FFFFFF;
+	text-decoration:none;
+	font-size: 13px;
+
+}
+
+article{
+margin:20px;
+background-color: #FFFFFF;
+padding: 30px 20px 20px;
+border-right: 3px;
+border-bottom:3px;
+border-color: #696969;
+border-style: solid;
+border-top:0;
+border-left:0;
+}
+
+.lasth2{
+	font-weight: 600;
+	font-size: 20px;
+	border-left: 5px solid #D3D3D3;
+	padding-left: 20px;
+}
+.nav4{
+
+	color:#A9A9A9;
+
+}
+
+.pic{
+	border:2px solid #D3D3D3;
+	width: 118px;
+	height: 118px;
+	text-align: center;
+	background-image: url("img/one.jpg");
+	background-repeat: no-repeat;
+	background-position: center;
+	padding: 5px;
+	margin-left: 50px;
+	margin-top: 20px;
+}
+
+form>div{
+	margin: 15px 0;
+	
+}
+
+form>div>div{
+	display: inline-block;
+
+}
+
+form>div>label{
+	
+	width: 37%;
+	text-align: right;
+	float: left;
+	margin-right: 13px;
+}
+
+form>div>div>span{
+	display: block;
+	color:#D3D3D3;
+	margin-top: 10px;
+}
+
+h2,h3,h4{
+
+	line-height: 40px;
+}
+
+h3{
+	color: #808080;
+	font-size: 18px;
+}
+
+h4{
+	
+	font-size: 15px;
+	font-weight: 200;
+}
+
+p{
+	text-indent:2.6%;
+	line-height: 30px;
+}
+
+ul>li{
+	list-style: none;
+}
+
+ol{
+	margin-left: 40px;
+	margin-bottom: 15px;
+}
+
+ol>li{
+	font-weight: 600;
+}
+
+table{
+	border-collapse:collapse;
+	width: 100%;
+}
+
+th{
+	text-align: left;
+	background-color: #000000;
+	color: #FFFFFF;
+}
+
+th,td{
+	padding: 5px;
+	border:1px solid #D3D3D3;
+}
+
+tfoot{
+	background-color: #D3D3D3;
+	font-weight: 600;
+}
+
+input[type="submit"]{
+	width: 100%;
+	height: 50px;
+	background-color: #0028cd;
+	color: #FFFFFF;
+	font-size: 20px;
+	font-weight: 500;
+	border-radius: 7px;
+	border:none;
+}
+
+input[type="radio"]{
+	color:#3355d0;
+}
+
+textarea{
+	width: 710px;
+	height:90px;
+}
