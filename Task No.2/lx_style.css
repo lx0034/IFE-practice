@@ -1,8 +1,158 @@
-@charset "UTF-8"
+	*{
+		margin:0;
+		padding:0;
+	}
 body{
-	font:bold 15px "microsoft yahei";
+	font:bold 14px/26px "microsoft yahei";
+	background: #dedede;
+}
+p::selection{
+	color:#fff;
+	background-color:#fc0;
 }
 img{
 	width:300px;
 	height:242px;
+}
+header{
+	width:100%;
+	height:60px;
+	position:relative;
+	background-color:#333;
+}
+header>h1{
+	position:absolute;
+	top:10px;
+	left:40px;
+	width:117px;
+	height:38px;
+	background:url(imgs/2.png) no-repeat;
+}
+header>ul{
+	float:right;
+	margin:20px 20px 0 0;
+}
+header>ul>li{
+	float: left;
+	margin-left:22px;
+}
+header>ul>li>a{
+	color:#fff;
+	text-decoration: none;
+}
+article{
+	width:1240px;
+	background:#fff;
+	margin:20px auto;
+	padding:40px 20px;
+	border-left: 1px solid #CDCDCD;
+	border-top: 1px solid #CDCDCD;
+	border-right: 2px solid #848484;
+	border-bottom: 2px solid #848484;
+}
+h2{
+	color:#73767b;
+	font:bold 16px/35px "microsoft yahei";
+}
+address{
+	color:#73767b;
+}
+p{
+	margin:20px 0 0 0;
+	text-indent: 2em;
+}
+img{
+	margin-top: 20px;
+}
+#art2>ul{
+	list-style: none;
+}
+#art3>figure{
+	width:120px;
+	height:124px;
+	text-align: center;
+	border:1px solid #cdcdcd;
+	margin:15px 0 15px 40px;
+}
+#art3>figure>img{
+	width:100px;
+	height:80px;
+	margin-top:8px;
+}
+#art4>ol{
+	margin-left:4em;
+}
+#art4>table{
+	width:100%;
+	border-collapse:collapse;
+	border-top:1px solid #cdcdcd;
+	border-left:1px solid #cdcdcd;
+}
+#art4>table td{
+	border-right:1px solid #cdcdcd;
+	border-bottom: 1px solid #cdcdcd;
+}
+#art4>table tr:first-child{
+	color:#fff;
+	background-color: #333;
+}
+#art4>table tr:last-child{
+	background-color: #ccc;
+}
+#art5{
+	margin:40px auto 20px auto;
+}
+#art5 h2{
+	color:#000;
+}
+#art5>form{
+	text-align: center;
+}
+#art5>form>div{
+	vertical-align: text-top;
+	margin:20px 0 10px 0;
+}
+#art5>form>div input{
+	margin-top: 10px;
+}
+#art5>form>div>p{
+	color:#9fa2a7;
+	margin:0;
+}
+input[type="email"],input[type="password"]{
+	width:160px;
+	height:20px;
+}
+select{
+	margin-top:10px;
+}
+textarea{
+	margin-top:10px;
+}
+input[type="email"],input[type="password"],input[type="radio"],input[type="checkbox"]{
+	margin-top:10px;
+}
+input[type="checkbox"]{
+	margin-left:10px;
+}
+input[type="submit"]{
+	width:1176px;
+	height:38px;
+	color:#fff;
+	font:bold 14px "microsoft yahei";
+	background-color:#3355d0;
+	border-radius:6px;
+}
+textarea{
+	font-size: 14px;
+	padding:5px;
+	/*text-indent: 20px;*/
+}
+footer{
+	width:100%;
+	height:70px;
+	line-height:70px;
+	color:#fff;
+	text-align: center;
+	background-color:#000;
 }
