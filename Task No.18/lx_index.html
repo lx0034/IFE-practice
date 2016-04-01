@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	body{
+		font-size:0;
+	}
+	div{
+		margin-bottom:10px;
+	}
+	span{
+		display:inline-block;
+		width:50px;
+		height:50px;
+		margin-right:10px;
+		background-color:#333;
+		text-align: center;
+		color:#fff;
+		font:bold 20px/50px "microsoft yahei";
+	}
+	input[type='button']{
+		margin-right:10px;
+	}
+	</style>
+</head>
+<body>
+	<div id="form">
+		<input type="text" id="input" />
+		<input type="button" id="left_in" value="左侧入" />
+		<input type="button" id="right_in" value="右侧入" />
+		<input type="button" id="left_out" value="左侧出" />
+		<input type="button" id="right_out" value="右侧出" />
+	</div>
+	<span></span>
+	<span></span>
+	<span></span>
+	<span></span>
+	<span></span>
+	<span></span>
+	<script>
+	(function(){
+		function aqiData(){
+			var aSpan = document.getElementsByTagName('span');
+			for(var i=0;i < aSpan.length;i++){
+				var Data = Math.floor(Math.random()*100+1);
+				aSpan[i].innerHTML = Data;
+			}
+		}
+		function delEle(ev){
+			var ev = ev || window.event;
+			var oBody = document.getElementsByTagName('body');
+			oBody[0].removeChild(this);
+		}
+		function leftIn(){
+			var oBody = document.getElementsByTagName('body');
+			var aSpan = document.getElementsByTagName('span');
+			var oInput = document.getElementById('input');
+			var cSpan = document.createElement('span');
+			cSpan.innerHTML = oInput.value;
+			oBody[0].insertBefore(cSpan,aSpan[0]);
+			oInput.value = '';
+		}
+		function rightIn(){
+			var oInput = document.getElementById('input');
+			var cSpan = document.createElement('span');
+			var oBody = document.getElementsByTagName('body');
+			cSpan.innerHTML = oInput.value;
+			oBody[0].appendChild(cSpan);
+			oInput.value = '';
+		}
+		function leftOut(){
+			var aSpan = document.getElementsByTagName('span');
+			var oBody = document.getElementsByTagName('body');
+			alert(aSpan[0].innerHTML);
+			oBody[0].removeChild(aSpan[0]);
+		}
+		function rightOut(){
+			var aSpan = document.getElementsByTagName('span');
+			var oBody = document.getElementsByTagName('body');
+			var len = aSpan.length;
+			alert(aSpan[len - 1].innerHTML);
+			oBody[0].removeChild(aSpan[len - 1]);
+		}
+		function init(){
+			var aSpan = document.getElementsByTagName('span');
+			var oLin = document.getElementById('left_in');
+			var oRin = document.getElementById('right_in');
+			var oLout = document.getElementById('left_out');
+			var oRout = document.getElementById('right_out');
+
+			for(var i=0;i < aSpan.length;i++){
+				aSpan[i].addEventListener('click',delEle,false);
+			}
+			oLin.addEventListener('click',leftIn,false);
+			oRin.addEventListener('click',rightIn,false);
+			oLout.addEventListener('click',leftOut,false);
+			oRout.addEventListener('click',rightOut,false);
+			aqiData();
+		}
+		init();
+	})();
+	</script>
+</body>
+
+</html>
