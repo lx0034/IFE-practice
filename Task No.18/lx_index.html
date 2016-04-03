@@ -12,13 +12,13 @@
 	}
 	span{
 		display:inline-block;
-		width:50px;
-		height:50px;
-		margin-right:10px;
-		background-color:#333;
-		text-align: center;
+		min-width:30px;
+		margin-right:2px;
+		padding:0 10px 0 10px;
 		color:#fff;
 		font:bold 20px/50px "microsoft yahei";
+		background-color:#333;
+		text-align: center;
 	}
 	input[type='button']{
 		margin-right:10px;
@@ -33,72 +33,112 @@
 		<input type="button" id="left_out" value="左侧出" />
 		<input type="button" id="right_out" value="右侧出" />
 	</div>
-	<span></span>
-	<span></span>
-	<span></span>
-	<span></span>
-	<span></span>
-	<span></span>
 	<script>
 	(function(){
-		function aqiData(){
-			var aSpan = document.getElementsByTagName('span');
-			for(var i=0;i < aSpan.length;i++){
-				var Data = Math.floor(Math.random()*100+1);
-				aSpan[i].innerHTML = Data;
+		var aSpan = document.getElementsByTagName('span');
+		var oBody = document.getElementsByTagName('body');
+		var arr = [];
+
+		function aqiData(num){
+			for(var i=0;i < num;i++){
+				var Data = Math.floor(Math.random()*90+10);
+				arr.push(Data);
 			}
 		}
-		function delEle(ev){
-			var ev = ev || window.event;
-			var oBody = document.getElementsByTagName('body');
-			oBody[0].removeChild(this);
+
+		function show(data){
+			for(var j = aSpan.length-1;j >= 0;j--){
+				oBody[0].removeChild(aSpan[j]);
+			}
+			for(var i=0;i < data.length;i++){
+				var cSpan = document.createElement('span');
+				cSpan.setAttribute('data-num',i);
+				cSpan.innerHTML = data[i];
+				oBody[0].appendChild(cSpan);
+			}
 		}
+
+		function delEle(datanum){
+			alert(arr[datanum]);
+			arr.splice(datanum,1);
+			show(arr);
+		}
+
+		function check(data){
+			var oInput = document.getElementById('input');
+			var numdata = parseInt(data);
+			if(!/^[0-9]+$/.test(numdata)){
+				alert('请输入整数数字');
+				oInput.focus();
+				return false;
+			}if(numdata < 10 || numdata > 100){
+				alert('请输入10-100之间的数字');
+				oInput.focus();
+				return false;
+			}
+			return true;
+		}
+
 		function leftIn(){
-			var oBody = document.getElementsByTagName('body');
-			var aSpan = document.getElementsByTagName('span');
 			var oInput = document.getElementById('input');
 			var cSpan = document.createElement('span');
-			cSpan.innerHTML = oInput.value;
-			oBody[0].insertBefore(cSpan,aSpan[0]);
+			if(check(oInput.value)){
+				arr.unshift(parseInt(oInput.value));
+				show(arr);
+			}
 			oInput.value = '';
 		}
+
 		function rightIn(){
 			var oInput = document.getElementById('input');
 			var cSpan = document.createElement('span');
-			var oBody = document.getElementsByTagName('body');
-			cSpan.innerHTML = oInput.value;
-			oBody[0].appendChild(cSpan);
+			if(check(oInput.value)){
+				arr.push(oInput.value);
+				show(arr);				
+			}
 			oInput.value = '';
 		}
+
 		function leftOut(){
-			var aSpan = document.getElementsByTagName('span');
-			var oBody = document.getElementsByTagName('body');
-			alert(aSpan[0].innerHTML);
-			oBody[0].removeChild(aSpan[0]);
+			if(aSpan[0] != undefined){
+				alert(arr[0]);
+				arr.shift();
+				show(arr);
+			}else{
+				alert('Error: 队列已空');
+			}
 		}
+
 		function rightOut(){
-			var aSpan = document.getElementsByTagName('span');
-			var oBody = document.getElementsByTagName('body');
-			var len = aSpan.length;
-			alert(aSpan[len - 1].innerHTML);
-			oBody[0].removeChild(aSpan[len - 1]);
+			if(aSpan[aSpan.length - 1] != undefined){
+				alert(arr[aSpan.length - 1]);
+				arr.pop();
+				show(arr);
+			}else{
+				alert('Error: 队列已空');
+			}	
 		}
+
 		function init(){
-			var aSpan = document.getElementsByTagName('span');
 			var oLin = document.getElementById('left_in');
 			var oRin = document.getElementById('right_in');
 			var oLout = document.getElementById('left_out');
 			var oRout = document.getElementById('right_out');
 
-			for(var i=0;i < aSpan.length;i++){
-				aSpan[i].addEventListener('click',delEle,false);
-			}
+			oBody[0].addEventListener('click',function(ev){
+				var ev = ev || window.event;
+				if(ev.target.nodeName.toLowerCase() == 'span'){
+					delEle(ev.target.dataset.num);
+				}
+			},false);
 			oLin.addEventListener('click',leftIn,false);
 			oRin.addEventListener('click',rightIn,false);
 			oLout.addEventListener('click',leftOut,false);
 			oRout.addEventListener('click',rightOut,false);
-			aqiData();
+			aqiData(10);
+			show(arr);
 		}
+
 		init();
 	})();
 	</script>

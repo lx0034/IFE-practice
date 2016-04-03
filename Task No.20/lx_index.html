@@ -12,10 +12,14 @@
 	}
 	span{
 		display:inline-block;
-		width:10px;
+		min-width:30px;
 		margin-right:2px;
-		background-color:#333;
+		padding:0 10px 0 10px;
+		color:#fff;
+		font:bold 20px/50px "microsoft yahei";
+		background-color:#999;
 		text-align: center;
+		-webkit-transition:1s;
 	}
 	input[type='button']{
 		margin-right:10px;
@@ -24,12 +28,14 @@
 </head>
 <body>
 	<div id="form">
-		<input type="text" id="input" />
+		<textarea name="input" id="input" cols="30" rows="3"></textarea>
+		<!-- <input type="text" id="input" /> -->
 		<input type="button" id="left_in" value="左侧入" />
 		<input type="button" id="right_in" value="右侧入" />
 		<input type="button" id="left_out" value="左侧出" />
 		<input type="button" id="right_out" value="右侧出" />
-		<input type="button" id="sort" value="排序">
+		<input type="text" id="searchtext" />
+		<input type="button" id="search" value="查询" />
 	</div>
 	<script>
 	(function(){
@@ -51,87 +57,56 @@
 			for(var i=0;i < data.length;i++){
 				var cSpan = document.createElement('span');
 				cSpan.setAttribute('data-num',i);
-				cSpan.style.height = data[i] + 'px';
+				cSpan.innerHTML = data[i];
+				// cSpan.style.height = data[i] + 'px';
 				oBody[0].appendChild(cSpan);
 			}
 		}
 
 		function delEle(datanum){
+			alert(arr[datanum]);
 			arr.splice(datanum,1);
 			show(arr);
 		}
 
 		function check(data){
-			var oInput = document.getElementById('input');
-			var numdata = parseInt(data);
-			if(!/^[0-9]+$/.test(numdata)){
-				alert('请输入整数数字');
-				oInput.focus();
-				return false;
-			}if(numdata < 10 || numdata > 100){
-				alert('请输入10-100之间的数字');
-				oInput.focus();
-				return false;
-			}
-			return true;
-		}
-
-		function sortnum(arr,l,r){
-			var temp = null;
-			var i = l;
-			var j = r;
-			if(l < r){
-				temp = arr[l];
-				while(i != j){
-					while(j > i && arr[j] > temp){
-						--j;
-					}
-					if(i < j){
-						arr[i] = arr[j];
-						++i;
-					}
-					while(i < j && arr[i] < temp){
-						++i;
-					}
-					if(i < j){
-						arr[j] = arr[i];
-						--j;
-					}
-				}
-				arr[i] = temp;
-				show(arr);
-				setTimeout(sortnum,100,arr,l,i-1);
-				setTimeout(sortnum,200,arr,i+1,r);
-			}
+			var aaa = [];
+			aaa = data.split(/[, ，、\n]+/g);
+			return aaa;
+			
+			// var oInput = document.getElementById('input');
+			// var numdata = parseInt(data);
+			// if(!/^[0-9]+$/.test(numdata)){
+			// 	alert('请输入整数数字');
+			// 	oInput.focus();
+			// 	return false;
+			// }if(numdata < 10 || numdata > 100){
+			// 	alert('请输入10-100之间的数字');
+			// 	oInput.focus();
+			// 	return false;
+			// }
+			// return true;
 		}
 
 		function leftIn(){
 			var oInput = document.getElementById('input');
 			var cSpan = document.createElement('span');
-			if(check(oInput.value)){
-				if(arr.length < 60){
-					arr.unshift(parseInt(oInput.value));
-					show(arr);
-				}else{
-					alert('超出数值范围');
-				}
-				
+			var result = check(oInput.value);
+			for(var i=0;i < result.length;i++){
+				arr.unshift(result[i]);
 			}
+			show(arr);
 			oInput.value = '';
 		}
 
 		function rightIn(){
 			var oInput = document.getElementById('input');
 			var cSpan = document.createElement('span');
-			if(check(oInput.value)){
-				if(arr.length < 60){
-					arr.push(oInput.value);
-					show(arr);
-				}else{
-					alert('超出数值范围');
-				}
-				
+			var result = check(oInput.value);
+			for(var i=0;i < result.length;i++){
+				arr.push(result[i]);
 			}
+			show(arr);		
 			oInput.value = '';
 		}
 
@@ -155,12 +130,22 @@
 			}	
 		}
 
+		function searchsth(){
+			var oText = document.getElementById('searchtext');
+			var Reg = new RegExp(oText.value);
+			for(var i=0;i < aSpan.length;i++){
+				if(Reg.test(aSpan[i].innerHTML)){
+					aSpan[i].style.background = '#333';
+				}
+			}	
+		}
+
 		function init(){
 			var oLin = document.getElementById('left_in');
 			var oRin = document.getElementById('right_in');
 			var oLout = document.getElementById('left_out');
 			var oRout = document.getElementById('right_out');
-			var oSort = document.getElementById('sort');
+			var oSearch = document.getElementById('search');
 
 			oBody[0].addEventListener('click',function(ev){
 				var ev = ev || window.event;
@@ -172,10 +157,9 @@
 			oRin.addEventListener('click',rightIn,false);
 			oLout.addEventListener('click',leftOut,false);
 			oRout.addEventListener('click',rightOut,false);
-			oSort.addEventListener('click',function(){
-				sortnum(arr,0,arr.length - 1);
-			},false);
-			aqiData(59);
+			oSearch.addEventListener('click',searchsth,false);
+
+			aqiData(10);
 			show(arr);
 		}
 
