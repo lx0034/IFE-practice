@@ -92,6 +92,10 @@
 			var oInput = document.getElementById('input');
 			var cSpan = document.createElement('span');
 			var result = check(oInput.value);
+			if(oInput.value == ''){
+				alert('请输入内容');
+				return ;
+			}
 			for(var i=0;i < result.length;i++){
 				arr.unshift(result[i]);
 			}
@@ -103,6 +107,10 @@
 			var oInput = document.getElementById('input');
 			var cSpan = document.createElement('span');
 			var result = check(oInput.value);
+			if(oInput.value == ''){
+				alert('请输入内容');
+				return ;
+			}
 			for(var i=0;i < result.length;i++){
 				arr.push(result[i]);
 			}
@@ -127,16 +135,27 @@
 				show(arr);
 			}else{
 				alert('Error: 队列已空');
-			}	
+			}
 		}
 
 		function searchsth(){
 			var oText = document.getElementById('searchtext');
-			var Reg = new RegExp(oText.value);
+			var a = true;
+			if(oText.value != ''){
+				var Reg = new RegExp(oText.value);
+			}else{
+				alert('请输入内容');
+				return ;
+			}
 			for(var i=0;i < aSpan.length;i++){
+				aSpan[i].style.background = '#999';
 				if(Reg.test(aSpan[i].innerHTML)){
 					aSpan[i].style.background = '#333';
+					a = false;
 				}
+			}
+			if(a){
+				alert('未找到匹配内容');
 			}	
 		}
 

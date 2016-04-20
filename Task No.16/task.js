@@ -19,12 +19,12 @@ function addAqiData() {
   if( !/^[\u4e00-\u9fa5a-zA-Z]+$/.test(oCity.value) || oCity.value == ''){
     alert('请填写正确城市名');
     oCity.focus();
-    return 
+    return ;
   };
   if( !/^[1-9]*$/.test(oValue.value) || oValue.value == ''){
     alert('请填写正确空气质量');
     oValue.focus();
-    return 
+    return ;
   };
   aqiData[oCity.value] = oValue.value;
   
