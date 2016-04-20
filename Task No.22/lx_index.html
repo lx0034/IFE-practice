@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#containter{
+			display:flex;
+			flex-flow:row wrap;
+			align-items:center;
+			justify-content:space-around;
+			width:800px;
+			height:300px;
+			border:3px solid black;
+			margin:100px auto 10px auto;
+		}
+		#containter>div{
+			width:360px;
+			height:240px;
+			border:3px solid black;
+			display:flex;
+			flex-flow:row wrap;
+			align-items:center;
+			justify-content:space-around;
+		}
+		#containter>div>div{
+			width:160px;
+			height:200px;
+			border:3px solid black;
+			display:flex;
+			flex-flow:row wrap;
+			align-items:center;
+			justify-content:space-around;
+		}
+		#containter>div>div>div{
+			width:50px;
+			height:100px;
+			border:3px solid black;
+		}
+		#btnDiv{
+			width:auto;
+			height:auto;
+			text-align: center;
+		}
+		#btnDiv>button{
+			width:auto;
+			height:50px;
+			font:bold 20px/30px 'microsoft yahei';
+		}
+
+	</style>
+
+</head>
+<body>
+	<div id="containter">
+		<div>
+			<div>
+				<div></div>
+				<div></div>
+			</div>
+			<div>
+				<div></div>
+				<div></div>
+			</div>
+		</div>
+		<div>
+			<div>
+				<div></div>
+				<div></div>
+			</div>
+			<div>
+				<div></div>
+				<div></div>
+			</div>
+		</div>
+	</div>
+	<div id="btnDiv">
+		<button>前序遍历</button>
+		<button>中序遍历</button>
+		<button>后序遍历</button>
+	</div>
+	<script async="true" defer>
+		(function(){
+			var contain = document.getElementById('containter');
+			var aBtn = document.getElementsByTagName('button');
+			var timer = null;
+			var i = 0;
+
+			aBtn[0].addEventListener('click',function(){
+				tree.pre(contain);
+				tree.move();
+			},false);
+			aBtn[1].addEventListener('click',function(){
+				tree.mid(contain);
+				tree.move();
+			},false);
+			aBtn[2].addEventListener('click',function(){
+				tree.bac(contain);
+				tree.move();
+			},false);
+			
+			function Tree(){
+				this.arr = [];
+			}
+
+			Tree.prototype.pre = function(node){
+				this.arr.push(node);
+				if(node.firstElementChild){
+					this.pre(node.firstElementChild);
+				}if(node.lastElementChild){
+					this.pre(node.lastElementChild);
+				}
+			};
+
+			Tree.prototype.mid = function(node){
+				if(node.firstElementChild){
+					this.mid(node.firstElementChild);
+				}
+				this.arr.push(node);
+				if(node.lastElementChild){
+					this.mid(node.lastElementChild);
+				}
+			};
+
+			Tree.prototype.bac = function(node){
+				if(node.firstElementChild){
+					this.bac(node.firstElementChild);
+				}
+				if(node.lastElementChild){
+					this.bac(node.lastElementChild);
+				}
+				this.arr.push(node);
+			};
+
+			Tree.prototype.move = function(){
+				var _this = this;
+				clearInterval(timer);
+				timer = setInterval(function(){
+					if(_this.arr[i] !== undefined){
+						for(var j=0;j < _this.arr.length;j++){
+							_this.arr[j].style.background = '#fff';
+						}
+						_this.arr[i].style.background = 'red';
+						i++;
+					}else{
+						for(var j=0;j < _this.arr.length;j++){
+							_this.arr[j].style.background = '#fff';
+						}
+						clearInterval(timer);
+					}
+				},500);
+				
+			}
+			var tree = new Tree();
+		})();		
+	</script>
+</body>
+</html>
