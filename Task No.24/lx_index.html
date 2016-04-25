@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#containter{
+			display:flex;
+			flex-flow:row wrap;
+			align-items:center;
+			justify-content:space-around;
+			border:3px solid black;
+			padding:5px 0 5px 0;
+			margin:100px auto 10px auto;
+		}
+		#containter div{
+			min-width:80px;
+			margin:0 5px 0 5px;
+			font:bold 14px 'microsoft yahei';
+			border:3px solid black;
+		}
+		#containter>div{
+			height:240px;
+			border:3px solid black;
+			display:flex;
+			flex-flow:row wrap;
+			align-items:center;
+			justify-content:space-around;
+		}
+		#containter>div>div{
+			width:auto;
+			height:200px;
+			border:3px solid black;
+			display:flex;
+			flex-flow:row wrap;
+			align-items:center;
+			justify-content:space-around;
+		}
+		#containter>div>div>div{
+			width:50px;
+			height:100px;
+			line-height:100px;
+			/*text-align: center;*/
+			border:3px solid black;
+		}
+		#btnDiv{
+			text-align: center;
+			margin-top:20px;
+		}
+		#btnDiv>button{
+			width:auto;
+			height:50px;
+			font:bold 20px/30px 'microsoft yahei';
+		}
+		#btnDiv>input{
+			width:280px;
+			height:16px;
+			padding:5px;
+		}
+		.select{
+			background-color:rgba(0,0,250,0.4);
+		}
+		.colorWhite{
+			background-color:#fff;
+		}
+		.colorRed{
+			background-color:#f00;
+		}
+
+	</style>
+
+</head>
+<body>
+	<div id="containter"> 
+		<div>1
+			<div>2
+				<div>3</div>
+				<div>4</div>
+				<div>5</div>
+				<div>6</div>
+			</div>
+			<div>7</div>
+			<div>8
+				<div>9</div>
+				<div>10</div>
+			</div>
+		</div>
+		<div>11
+			<div>12
+				<div>13</div>
+				<div>14</div>
+			</div>
+			<div>15
+				<div>16</div>
+				<div>17</div>
+				<div>18</div>
+			</div>
+		</div>
+	</div>
+	<div id="btnDiv">
+		<input type="text" /><br />
+		<br />
+		<button>前序遍历查询</button>
+		<button>后序遍历查询</button><br />
+		<br />
+		<button>删除节点</button><br />
+		<input type="text" />
+		<button>添加节点</button>
+	</div>
+	<script async="true" defer>
+		(function(){
+			var contain = document.getElementById('containter');
+			var aBtn = document.getElementsByTagName('button');
+			var aInput = document.getElementsByTagName('input');
+			var aDiv = document.getElementsByTagName('div');
+			var timer = null;
+			var i = 0;
+
+			contain.addEventListener('click',function(ev){
+				var ev = ev || window.event;
+				for(var k=0;k < aDiv.length;k++){
+					aDiv[k].className = '';
+				}
+				ev.target.className = 'select';
+			},false);
+
+			aBtn[0].addEventListener('click',function(){
+				i=0;
+				var tree = new Tree();
+				tree.pre(contain);
+				tree.move();
+			},false);
+
+			aBtn[1].addEventListener('click',function(){
+				i=0;
+				var tree = new Tree();
+				tree.bac(contain);
+				tree.move();
+			},false);
+
+			aBtn[2].addEventListener('click',function(){
+				var oSele = contain.getElementsByClassName('select')[0];
+				var parent = oSele.parentNode;
+				parent.removeChild(oSele);
+			},false);
+
+			aBtn[3].addEventListener('click',function(){
+				var oSele = contain.getElementsByClassName('select')[0];
+				var cDiv = document.createElement('div');
+				if(aInput[1].value != ''){
+					cDiv.innerHTML = aInput[1].value;
+				}
+				oSele.appendChild(cDiv);
+				cDiv.style.width = "-webkit-clac(100% - 10px * 2)px";
+			},false);
+			
+			function Tree(){
+				this.arr = [];
+			}
+
+			Tree.prototype.pre = function(node){
+				this.arr.push(node);
+				for(var k=0;k < node.children.length;k++){
+					if(node.children[k]){
+						this.pre(node.children[k]);
+					}
+				}
+			};
+
+			Tree.prototype.bac = function(node){
+				for(var k=0;k < node.children.length;k++){
+					if(node.children[k]){
+						this.bac(node.children[k]);
+					}
+				}
+				this.arr.push(node);
+				return this;
+			};
+
+			Tree.prototype.move = function(){
+				var _this = this;
+				clearInterval(timer);
+
+				timer = setInterval(function(){
+					if(_this.arr[i] !== undefined){
+						for(var j=0;j < _this.arr.length;j++){
+							_this.arr[j].className = 'colorWhite';
+							// _this.arr[j].style.background = '#fff';
+						}
+						_this.arr[i].className = 'colorRed';
+						// _this.arr[i].style.background = 'red';
+
+						if(_this.arr[i].textContent.split('\n').slice(0,1) == aInput[0].value){
+							clearInterval(timer);
+						}
+						i++;
+					}else{
+						for(var j=0;j < _this.arr.length;j++){
+							_this.arr[j].className = 'colorWhite';
+							// _this.arr[j].style.background = '#fff';
+						}
+						clearInterval(timer);
+					}
+				},300);
+			}
+			
+		})();		
+	</script>
+</body>
+</html>
