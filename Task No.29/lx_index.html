@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	body{
+		font:bold 18px/20px "microsoft yahei";
+	}
+	input{
+		height:24px;
+	}
+	span{
+		font-size:12px;
+		color:#999;
+		text-indent: 50%;
+	}
+	</style>
+</head>
+<body>
+	<label for="login">
+		名称：<input type="text" placeholder="必填，长度为4~16个字符" />
+	</label>	
+		<button>验证</button><br />
+		<span></span>
+<script>
+	(function(){
+		var oInput = document.getElementsByTagName('input')[0];
+		var oBtn = document.getElementsByTagName('button')[0];
+		var oSpan = document.getElementsByTagName('span')[0];
+
+		oBtn.addEventListener('click',handle,false);
+
+		function handle(){
+			if(contentLength(oInput.value) == 0){
+				oSpan.innerHTML = '不能为空';
+			}else if(contentLength(oInput.value) < 4 || contentLength(oInput.value) > 16){
+				oSpan.innerHTML = '格式不正确';
+			}else{
+				oSpan.innerHTML = '验证成功';
+			}
+
+		}
+
+		function contentLength(str){
+			var Length = 0;
+			for(var i=0;i < str.length;i++){
+				if(str.charCodeAt(i) <= 128){
+					Length += 1;
+				}else{
+					Length += 2;
+				}
+			}
+			return Length;
+		}
+
+	})();
+
+</script>
+</body>
+</html>
